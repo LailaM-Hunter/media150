@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Story</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Interactive Story Generator</h1>
+      <div class="wrapper">
+        <div>
+          <label for="name">Enter a name:</label>
+          <input type="text" id="name" placeholder="Type a name" required />
+        </div>
+        <div>
+          <label for="place">Enter a place</label>
+          <input type="text" id="place" placeholder="Type a place" required />
+        </div>
+        <div>
+          <label for="object">Enter an object</label>
+          <input
+            type="text"
+            id="object"
+            placeholder="Type an object"
+            required
+          />
+        </div>
+        <div>
+          <label for="action">Enter an action</label>
+          <input
+            type="text"
+            id="action"
+            placeholder="Type an action"
+            required
+          />
+        </div>
+      </div>
+      <button id="generateStory">Generate Story</button>
+      <div id="story" class="story"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+body {
+  font-family: "Poppins", sans-serif;
+  box-sizing: content-box;
+  height: 100vh;
+  background: linear-gradient(135deg, #8052ec, #d161ff);
+}
+.container {
+  position: absolute;
+  width: min(400px, 90vw);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2);
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+input {
+  font-size: 16px;
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1.5px solid #000000;
+}
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+button {
+  width: 100%;
+  background-color: #8052ec;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 15px 0;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+}
+button:hover {
+  background-color: #3f0eb0;
+}
+
+.story {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #96b2ff;
+  border-radius: 10px;
+  display: none;
+}
+
+document.getElementById("generateStory").addEventListener("click", function () {
+  let name = document.getElementById("name").value.trim();
+  let place = document.getElementById("place").value.trim();
+  let object = document.getElementById("object").value.trim();
+  let action = document.getElementById("action").value.trim();
+  let storyDiv = document.getElementById("story");
+
+  console.log(name, place, object, action);
+
+  if (name === "" || place === "" || object === "" || action === "") {
+    alert("Please fill in all fields");
+  }
+
+  let stories = [
+    `One day, ${name} went to ${place} and found a mysterious ${object}. Without thinking, ${name} decided to ${action}, and something magical happened!`,
+    `In the heart of ${place}, ${name} discovered a hidden ${object}. As curiosity took over, ${name} started to ${action}, and the adventure began!`,
+    `${name} was walking through ${place} when suddenly a ${object} appeared. Without hesitation, ${name} chose to ${action}, leading to an unforgettable experience!`,
+    `While exploring ${place}, ${name} saw a sparkling ${object}. As soon as they touched it, they were transported to a new world where they had to ${action} to find a way back home!`,
+    `One night at ${place}, ${name} found an ancient ${object}. The moment they tried to ${action}, the object began to glow, revealing a hidden secret!`,
+    `At ${place}, ${name} was given a strange ${object} by an old wise person. They were told that if they ${action} at the right moment, something incredible would happen!`,
+    `${name} was cleaning their attic when they stumbled upon an old ${object}. Curious, they decided to ${action}, and suddenly, they were taken on a journey through time!`,
+  ];
+  let randomStory = stories[Math.floor(Math.random() * stories.length)];
+  console.log(randomStory);
+  storyDiv.innerText = randomStory;
+  storyDiv.style.display = "block";
+});
